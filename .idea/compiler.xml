@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="sqlgenerator" />
+        <module name="tutu_cart_interface" />
+        <module name="tutu_cart_service" />
+        <module name="tutu_cart_web" />
+        <module name="tutu_common" />
+        <module name="tutu_content_interface" />
+        <module name="tutu_content_service" />
+        <module name="tutu_dao" />
+        <module name="tutu_manager_web" />
+        <module name="tutu_page_interface" />
+        <module name="tutu_page_service" />
+        <module name="tutu_pojo" />
+        <module name="tutu_portal_web" />
+        <module name="tutu_search_interface" />
+        <module name="tutu_search_service" />
+        <module name="tutu_search_web" />
+        <module name="tutu_sellergoods_interface" />
+        <module name="tutu_sellergoods_service" />
+        <module name="tutu_shop_web" />
+        <module name="tutu_sms_web" />
+        <module name="tutu_solr_util" />
+        <module name="tutu_user_interface" />
+        <module name="tutu_user_service" />
+        <module name="tutu_user_web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="1.8">
+      <module name="dbshop_parent" target="1.8" />
+      <module name="springJmsProducer" target="1.8" />
+      <module name="tutu_sms_interface" target="1.8" />
+      <module name="tutu_sms_service" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
