@@ -6,7 +6,9 @@
     <file type="web" url="file://$PROJECT_DIR$/tutu_cart_web" />
     <file type="web" url="file://$PROJECT_DIR$/tutu_content_service" />
     <file type="web" url="file://$PROJECT_DIR$/tutu_manager_web" />
+    <file type="web" url="file://$PROJECT_DIR$/tutu_order_service" />
     <file type="web" url="file://$PROJECT_DIR$/tutu_page_service" />
+    <file type="web" url="file://$PROJECT_DIR$/tutu_page_web" />
     <file type="web" url="file://$PROJECT_DIR$/tutu_portal_web" />
     <file type="web" url="file://$PROJECT_DIR$/tutu_search_service" />
     <file type="web" url="file://$PROJECT_DIR$/tutu_search_web" />

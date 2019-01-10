@@ -32,6 +32,9 @@
         <module>tutu_cart_interface</module>
         <module>tutu_cart_service</module>
         <module>tutu_cart_web</module>
+        <module>tutu_page_web</module>
+        <module>tutu_order_interface</module>
+        <module>tutu_order_service</module>
     </modules>
 
     <!-- 集中定义依赖版本号 -->

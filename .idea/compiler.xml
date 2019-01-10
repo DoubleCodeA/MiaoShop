@@ -15,8 +15,11 @@
         <module name="tutu_content_service" />
         <module name="tutu_dao" />
         <module name="tutu_manager_web" />
+        <module name="tutu_order_interface" />
+        <module name="tutu_order_service" />
         <module name="tutu_page_interface" />
         <module name="tutu_page_service" />
+        <module name="tutu_page_web" />
         <module name="tutu_pojo" />
         <module name="tutu_portal_web" />
         <module name="tutu_search_interface" />
