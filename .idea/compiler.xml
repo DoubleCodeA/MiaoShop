@@ -20,11 +20,17 @@
         <module name="tutu_page_interface" />
         <module name="tutu_page_service" />
         <module name="tutu_page_web" />
+        <module name="tutu_pay_interface" />
+        <module name="tutu_pay_service" />
         <module name="tutu_pojo" />
         <module name="tutu_portal_web" />
         <module name="tutu_search_interface" />
         <module name="tutu_search_service" />
         <module name="tutu_search_web" />
+        <module name="tutu_seckill_interface" />
+        <module name="tutu_seckill_service" />
+        <module name="tutu_seckill_task" />
+        <module name="tutu_seckill_web" />
         <module name="tutu_sellergoods_interface" />
         <module name="tutu_sellergoods_service" />
         <module name="tutu_shop_web" />
@@ -36,8 +42,10 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
+      <module name="com_seckill_service" target="1.8" />
       <module name="dbshop_parent" target="1.8" />
       <module name="springJmsProducer" target="1.8" />
+      <module name="tutu_seckell_service" target="1.8" />
       <module name="tutu_sms_interface" target="1.8" />
       <module name="tutu_sms_service" target="1.8" />
     </bytecodeTargetLevel>

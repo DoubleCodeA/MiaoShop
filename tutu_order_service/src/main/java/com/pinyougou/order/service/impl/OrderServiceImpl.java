@@ -1,19 +1,18 @@
 package com.pinyougou.order.service.impl;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import com.pinyougou.mapper.TbOrderItemMapper;
+import com.pinyougou.mapper.TbPayLogMapper;
 import com.pinyougou.order.service.OrderService;
-import com.pinyougou.pojo.TbBrand;
-import com.pinyougou.pojo.TbOrderItem;
+import com.pinyougou.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.pinyougou.mapper.TbOrderMapper;
-import com.pinyougou.pojo.TbOrder;
-import com.pinyougou.pojo.TbOrderExample;
 import com.pinyougou.pojo.TbOrderExample.Criteria;
 
 
@@ -38,7 +37,8 @@ public class OrderServiceImpl implements OrderService {
 	private TbOrderItemMapper orderItemMapper;
 	@Autowired
 	private IdWorker idWorker;
-	
+	@Autowired
+	private TbPayLogMapper payLogMapper;
 	/**
 	 * 查询全部
 	 */
@@ -64,6 +64,8 @@ public class OrderServiceImpl implements OrderService {
 	public void add(TbOrder order) {
 		//获得购物车的数据
         List<Cart> cartList = (List<Cart>) redisTemplate.boundHashOps("cartList").get(order.getUserId());
+        List<String> orderIdList = new ArrayList<>();
+        double total_money = 0;
         for (Cart cart : cartList){
             long orderId = idWorker.nextId();
             TbOrder tbOrder = new TbOrder();
@@ -88,8 +90,27 @@ public class OrderServiceImpl implements OrderService {
             }
             tbOrder.setPayment(new BigDecimal(money));
             orderMapper.insert(tbOrder);
+            orderIdList.add(orderId+"");
+            total_money += money;
 
         }
+        if ("1".equals(order.getPaymentType())){
+			TbPayLog payLog = new TbPayLog();
+			String outTradeNo = idWorker.nextId()+"";
+			payLog.setOutTradeNo(outTradeNo);
+			payLog.setCreateTime(new Date());
+			String ids = orderIdList.toString()
+					.replace("[", "")
+					.replace("]", "")
+					.replace(" ", "");
+			payLog.setOrderList(ids);
+			payLog.setPayType("1");
+			payLog.setTotalFee((long)(total_money*100));
+			payLog.setTradeState("0");
+			payLog.setUserId(order.getUserId());
+			payLogMapper.insert(payLog);
+			redisTemplate.boundHashOps("payLog").put(order.getUserId(), payLog);
+		}
         redisTemplate.boundHashOps("cartList").delete(order.getUserId());
 
 	}
@@ -184,5 +205,32 @@ public class OrderServiceImpl implements OrderService {
 		Page<TbOrder> page= (Page<TbOrder>)orderMapper.selectByExample(example);		
 		return new PageResult(page.getTotal(), page.getResult());
 	}
-	
+
+	@Override
+	public TbPayLog searchPayLogFromRedis(String userId) {
+		return (TbPayLog) redisTemplate.boundHashOps("payLog").get(userId);
+	}
+
+	@Override
+	public void updateOrderStatus(String out_trade_no, String transaction_id) {
+		TbPayLog payLog = payLogMapper.selectByPrimaryKey(out_trade_no);
+		payLog.setPayTime(new Date());
+		payLog.setTradeState("1");
+		payLog.setTransactionId(transaction_id);
+		payLogMapper.updateByPrimaryKey(payLog);
+
+        String orderList = payLog.getOrderList();
+        String[] orderIds = orderList.split(",");
+
+        for (String orderId : orderIds) {
+            TbOrder order = orderMapper.selectByPrimaryKey(Long.parseLong(orderId));
+            if (order != null){
+                order.setStatus("2");
+                orderMapper.updateByPrimaryKey(order);
+            }
+        }
+        redisTemplate.boundHashOps("payLog").delete(payLog.getUserId());
+    }
+
+
 }

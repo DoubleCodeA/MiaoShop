@@ -10,5 +10,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>tutu_common</artifactId>
-
+    <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpclient</artifactId>
+    </dependency>
 </project>

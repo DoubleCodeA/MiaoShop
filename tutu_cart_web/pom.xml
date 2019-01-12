@@ -33,6 +33,11 @@
             <artifactId>tutu_order_interface</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.double</groupId>
+            <artifactId>tutu_pay_service</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>

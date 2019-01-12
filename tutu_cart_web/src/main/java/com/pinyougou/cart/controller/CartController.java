@@ -2,6 +2,9 @@ package com.pinyougou.cart.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.pinyougou.cart.service.CartService;
+import com.pinyougou.order.service.OrderService;
+import com.pinyougou.pay.service.WeixinPayService;
+import com.pinyougou.pojo.TbPayLog;
 import entity.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/cart")
@@ -25,6 +29,7 @@ public class CartController {
     private HttpServletRequest request;
     @Autowired
     private HttpServletResponse response;
+
 
     @RequestMapping("/addGoodsToCartList")
     @CrossOrigin(origins = "http://localhost:9105",allowCredentials = "true")

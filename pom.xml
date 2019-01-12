@@ -35,6 +35,14 @@
         <module>tutu_page_web</module>
         <module>tutu_order_interface</module>
         <module>tutu_order_service</module>
+        <module>tutu_pay_interface</module>
+        <module>tutu_pay_service</module>
+        <module>tutu_seckill_interface</module>
+        <module>com_seckill_service</module>
+        <module>tutu_seckell_service</module>
+        <module>tutu_seckill_service</module>
+        <module>tutu_seckill_web</module>
+        <module>tutu_seckill_task</module>
     </modules>
 
     <!-- 集中定义依赖版本号 -->
